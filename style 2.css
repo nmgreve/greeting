@@ -1,0 +1,194 @@
+body {
+    font-family: "Arya", sans-serif; /* Stylish sans-serif font */
+    line-height: 1.2; /* Adjust line height to reduce vertical spacing */
+    padding: 0;
+    margin: 0; /* Remove default margin */
+    background: rgb(41, 58, 79);
+    color: #f0f0f0;
+    text-align: center;
+    letter-spacing: .5px; /* Slightly increase letter spacing for all text */
+}
+
+.container {
+    position: relative; /* Ensure the header image stays in the normal flow */
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Prevent any overflow issues */
+}
+
+.header-container {
+    position: relative; /* Ensure the header image stays in the normal flow */
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Prevent any overflow issues */
+    margin: 0; /* Ensure no extra margin below the header */
+    padding: 0;
+}
+
+.header-img {
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+    position: relative; /* Change to relative positioning */
+    top: 0; /* Align to the top of the page */
+    left: 0; /* Align to the left of the page */
+}
+
+.content-container {
+    margin: auto;
+    padding: 20px;
+    margin-top: -70px;
+    margin-bottom: 50px;
+}
+
+.content-container h1 {
+    margin-bottom: 20px;
+    font-family: "Arya", sans-serif; /* Apply the new font */
+    letter-spacing: 5px; /* Increase letter spacing for the header */
+    font-weight: 100; /* Use regular weight for the header */
+}
+
+@media (max-width: 500px) {
+    .content-container h1 {
+        font-size: 22px;
+    }
+
+    .content-container {
+        max-width: 500px;
+    }
+
+    .header-img {
+        width: 150vw; /* Adjust image width for smaller screens */
+        transform: translateX(-14%);
+    }
+}
+
+@media (min-width: 501px) {
+    .header-img {
+        width: 100vw; /* Keep larger width for bigger screens */
+    }
+
+    .content-container {
+        max-width: 750px;
+    }
+
+    .content-container h1 {
+        font-size: 36px;
+    }
+}
+
+.content-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: "Arya", sans-serif; /* Apply the new font to other elements */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+}
+
+.input-container {
+    position: relative;
+    width: 100%; /* Match the width of the input field */
+}
+
+#nameInput {
+    width: 100%; /* Ensure the input spans the full width of its container */
+    padding: 8px 12px; /* Add padding for spacing */
+    font-size: 16px;
+    line-height: 1.2;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    font-family: "Arya", sans-serif;
+}
+
+.clear-button {
+    position: absolute;
+    right: 10px; /* Position the button inside the input field */
+    top: 60%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgb(41, 58, 79);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.clear-button:hover {
+    color: rgb(96, 133, 177); /* Darker color on hover */
+}
+
+input {
+    margin-top: 10px;
+    width: 100%; /* Ensure the input spans the full width of its container */
+    padding: 8px 12px; /* Reduce vertical padding */
+    font-size: 16px;
+    line-height: 1.2; /* Reduce line height for the input text */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    font-family: "Arya", sans-serif; /* Apply the new font to other elements */
+    height: 40px; /* Explicitly set height to ensure consistent appearance */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+}
+
+ul#autocomplete-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    background-color: rgb(34, 48, 66);
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    width: 100%; /* Match the width of the input field */
+    box-sizing: border-box; /* Ensure the width includes padding and border */
+}
+
+ul#autocomplete-list li {
+    padding: 8px; /* Adjust padding to reduce vertical space */
+    line-height: 1.2; /* Reduce line height for list items */
+    font-family: "Arya", sans-serif; /* Apply the new font to other elements */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+}
+
+ul#autocomplete-list li:hover {
+    background-color: rgb(27, 38, 52);
+}
+
+ul#autocomplete-list, ul#tablemates {
+    list-style-type: none; /* Removes bullets */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+}
+
+#result {
+    margin-top: 20px;
+}
+
+#result img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.return-button {
+    position: fixed; /* Fix the button relative to the viewport */
+    bottom: 20px; /* px from the bottom of the viewable page */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    padding: 5px 15px; /* Adjust padding for better alignment */
+    font-size: 16px;
+    width: 180px;
+    line-height: 1.2; /* Reduce line height for the button text */
+    color: rgb(41, 58, 79);
+    background-color: #f0f0f0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-family: "Arya", sans-serif; /* Apply the new font to the button */
+    letter-spacing: 0.75px; /* Increase letter spacing for the button */
+}
+
+.return-button:hover {
+    background-color: #c8c8c8; /* Darker blue on hover */
+}
