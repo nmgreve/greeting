@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leave a Message</title>
   <link rel="stylesheet" href="style.css" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.gstatic.com; object-src 'none';">
 </head>
 <body>
   <div class="container">
     <h1>Leave a Message for the Couple 💍</h1>
-    <input id="nameInput" type="text" placeholder="Your Name(s)" required />
+    <div class="input-wrapper">
+      <input id="nameInput" type="text" placeholder="Your Name(s)" required />
+      <button id="clearBtn" class="hidden">✖</button>
+    </div>
 
     <button id="startBtn">Start Recording</button>
 

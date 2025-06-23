@@ -7,6 +7,7 @@ const countdownEl = document.getElementById("countdown");
 const warningEl = document.getElementById("warning");
 const preview = document.getElementById("preview");
 const statusMsg = document.getElementById("statusMsg");
+const clearBtn = document.getElementById("clearBtn");
 
 // NEW stop button
 const stopBtn = document.createElement("button");
@@ -18,9 +19,22 @@ let mediaRecorder;
 let chunks = [];
 let timer;
 
+nameInput.oninput = () => {
+  if (!startBtn.disabled) { // Only show the clear button if recording hasn't started
+    clearBtn.classList.toggle("visible", nameInput.value.trim() !== "");
+  }
+};
+
+clearBtn.onclick = () => {
+  nameInput.value = "";
+  clearBtn.classList.remove("visible");
+};
+
 startBtn.onclick = async () => {
   const name = nameInput.value.trim();
   if (!name) return alert("Please enter your name.");
+
+  clearBtn.classList.remove("visible"); // Hide clear button during recording
 
   const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   preview.srcObject = stream;
@@ -40,11 +54,13 @@ startBtn.onclick = async () => {
 
     try {
       const fileRef = ref(window.firebaseStorage, "wedding-videos/" + fileName);
+      console.log("Firebase Storage Reference:", fileRef); // Debugging: Log the storage reference
+      console.log("Firebase Storage Object:", window.firebaseStorage); // Debugging: Log the storage object
       await uploadBytes(fileRef, blob);
       statusMsg.textContent = "✅ Video uploaded! Thank you!";
     } catch (err) {
-      console.error(err);
-      statusMsg.textContent = "❌ Upload failed. Please try again.";
+      console.error("Upload failed:", err); // Log the full error object for debugging
+      statusMsg.textContent = `❌ Upload failed: ${err.message || "Unknown error"}. Please check the console for more details.`;
     }
 
     reset();
@@ -88,7 +104,7 @@ function reset() {
   countdownEl.classList.remove("green");
   nameInput.disabled = false;
   startBtn.disabled = false;
-  nameInput.value = "";
+  clearBtn.classList.toggle("visible", nameInput.value.trim() !== ""); // Show clear button after reset
 
   const stream = preview.srcObject;
   if (stream) {

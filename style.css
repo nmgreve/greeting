@@ -57,4 +57,28 @@ body {
   .hidden {
     display: none;
   }
-  
+
+  .input-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  #nameInput {
+    padding-right: 30px; /* Add space for the clear button */
+  }
+
+  #clearBtn {
+    position: absolute;
+    right: 10px; /* Adjust spacing to ensure right justification */
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #clearBtn.visible {
+    display: inline-block;
+  }
