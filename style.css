@@ -1,32 +1,123 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
+    font-family: "Arya", sans-serif; /* Stylish sans-serif font */
+    line-height: 1.2; /* Adjust line height to reduce vertical spacing */
     padding: 0;
-    background: #fff8f0;
-    color: #333;
+    margin: 0; /* Remove default margin */
+    background: rgb(41, 58, 79);
+    color: #f0f0f0;
     text-align: center;
-  }
+    letter-spacing: .5px; /* Slightly increase letter spacing for all text */
+}
   
-  .container {
-    padding: 20px;
-    max-width: 500px;
+.container {
+    position: relative; /* Ensure the header image stays in the normal flow */
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Prevent any overflow issues */
+}
+
+.header-container {
+    position: relative; /* Ensure the header image stays in the normal flow */
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Prevent any overflow issues */
+    margin: 0; /* Ensure no extra margin below the header */
+    padding: 0;
+}
+
+.header-img {
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+    position: relative; /* Change to relative positioning */
+    top: 0; /* Align to the top of the page */
+    left: 0; /* Align to the left of the page */
+}
+
+.content-container {
     margin: auto;
-  }
+    padding: 20px;
+    margin-bottom: 50px;
+}
   
-  input, button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    font-size: 1.1em;
+.content-container h1 {
+    font-family: "Arya", sans-serif; /* Apply the new font */
+    letter-spacing: 5px; /* Increase letter spacing for the header */
+    font-weight: 100; /* Use regular weight for the header */
+}
+
+.content-container h2 {
+    font-family: "Arya", sans-serif; /* Apply the new font */
+    letter-spacing: 5px; /* Increase letter spacing for the header */
+    font-weight: 100; /* Use regular weight for the header */
+    font-size: 18px;
+    margin-top: 5px;
+    margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+    .content-container h1 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    .content-container h3 {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .content-container {
+        max-width: 500px;
+        margin-top: -40px;
+    }
+
+    .header-img {
+        width: 150vw; /* Adjust image width for smaller screens */
+        transform: translateX(-14%);
+    }
+}
+
+@media (min-width: 501px) {
+    .header-img {
+        width: 100vw; /* Keep larger width for bigger screens */
+    }
+
+    .content-container {
+        max-width: 750px;
+        margin-top: -70px;
+    }
+
+    .content-container h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+}
+
+.content-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: "Arya", sans-serif; /* Apply the new font to other elements */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+}
+
+  .record-button {
+    width: 200px;
+    padding: 0px;
+    margin: 10px;
+    font-size: 22px;
+    text-align: center;
     border-radius: 10px;
     border: 1px solid #ccc;
-  }
-  
-  button {
-    background-color: #007bff;
+    background-color: #b3a369;
     color: white;
     border: none;
+    font-family: "Arya", sans-serif; /* Apply the new font to the button */
+    letter-spacing: 0.75px; /* Increase letter spacing for the button */
   }
+
+.button:hover {
+    background-color: #7a6d3e; /* Darker blue on hover */
+}
   
   #videoSection {
     position: relative;
@@ -37,10 +128,18 @@ body {
     border-radius: 10px;
     margin-top: 10px;
   }
+
+  .recording-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* space between items */
+    margin-top: 10px;
+    position: relative; /* Change to relative positioning */
+    justify-content: center; 
+  }
   
   #countdown {
     font-size: 2em;
-    margin-top: 10px;
     color: red;
   }
   
@@ -58,27 +157,71 @@ body {
     display: none;
   }
 
-  .input-wrapper {
+  .content-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: "Arya", sans-serif; /* Apply the new font to other elements */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+  }
+
+  .input-container {
     position: relative;
-    display: inline-block;
+    width: 100%; /* Match the width of the input field */
   }
 
   #nameInput {
-    padding-right: 30px; /* Add space for the clear button */
+    width: 100%; /* Ensure the input spans the full width of its container */
+    padding: 8px 12px; /* Add padding for spacing */
+    font-size: 16px;
+    line-height: 1.2;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    font-family: "Arya", sans-serif;
   }
 
-  #clearBtn {
+  #nameInput::placeholder {
+  color: #222;           /* Darker color */
+  font-weight: 700;      /* Bold */
+  opacity: 1;            /* Ensure full opacity */
+  font-size: 1.05em;     /* Slightly larger, optional */
+}
+
+.clear-button {
     position: absolute;
-    right: 10px; /* Adjust spacing to ensure right justification */
+    right: 10px; /* Position the button inside the input field */
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
+    background: none;
     border: none;
-    font-size: 18px;
+    color: rgb(41, 58, 79);
+    font-size: 24px;
     cursor: pointer;
-    display: none;
-  }
+    padding: 0;
+}
 
-  #clearBtn.visible {
-    display: inline-block;
-  }
+.clear-button:hover {
+    color: rgb(96, 133, 177); /* Darker color on hover */
+}
+
+.return-button {
+    position: fixed; /* Fix the button relative to the viewport */
+    bottom: 10px; /* px from the bottom of the viewable page */
+    right: 10px; /* Center the button horizontally */
+    padding: 7px 0px; /* Adjust padding for better alignment */
+    padding-bottom: 12px;
+    font-size: 14px;
+    width: 75px;
+    line-height: 1.3; /* Reduce line height for the button text */
+    color: rgb(41, 58, 79);
+    background-color: #f0f0f0;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-family: "Arya", sans-serif; /* Apply the new font to the button */
+    letter-spacing: 0.75px; /* Increase letter spacing for the button */
+}
+
+.return-button:hover {
+    background-color: #c8c8c8; /* Darker blue on hover */
+}

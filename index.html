@@ -3,27 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Leave a Message</title>
+  <title>The Greve's Guestbook</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arya:wght@400;700&display=swap" rel="stylesheet">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.gstatic.com/firebasejs https://www.googletagmanager.com https://nmgreve.github.io; object-src 'none';">
 </head>
 <body>
   <div class="container">
-    <h1>Leave a Message for the Couple 💍</h1>
-    <div class="input-wrapper">
-      <input id="nameInput" type="text" placeholder="Your Name(s)" required />
-      <button id="clearBtn" class="hidden">✖</button>
+    <div class="header-container">
+      <img src="sparkle.png" alt="Header Image" class="header-img">
     </div>
+    <div class="content-container">
+      <h1>SIGN OUR GUESTBOOK</h1>
+      <h2>Record a Message for the Couple</h2>
+      <div class="input-container">
+        <input id="nameInput" type="text" placeholder="Enter Your Name(s)" required>
+        <button id="clearButton" class="clear-button" type="button">X</button>
+      </div>
 
-    <button id="startBtn">Start Recording</button>
-
-    <div id="videoSection" class="hidden">
-      <video id="preview" autoplay muted playsinline></video>
-      <div id="countdown">60</div>
+      <div class="recording-controls">
+        <button id="startBtn" class="record-button">Start Recording</button>
+        <div id="countdown">60</div>
+      </div>
       <div id="warning" class="hidden">⏳ Almost out of time!</div>
-    </div>
 
-    <p id="statusMsg"></p>
+      <div id="videoSection" class="hidden">
+        <video id="preview" autoplay muted playsinline></video>
+      </div>
+
+      <p id="statusMsg"></p>
+
+    <a href="https://theknot.com/ncgreve" class="return-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" style="vertical-align:middle" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3.535 3.535a4 4 0 01-5.657-5.657l1.414-1.414M10.172 13.828a4 4 0 010-5.656l3.535-3.535a4 4 0 015.657 5.657l-1.414 1.414"/>
+        </svg>
+        WEDDING WEBSITE
+      </a>
+    </div>
   </div>
 
   <script type="module" src="firebase-config.js"></script>
