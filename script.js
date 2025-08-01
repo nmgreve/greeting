@@ -38,6 +38,8 @@ startBtn.onclick = async () => {
 
     chunks = [];
     videoSection.classList.remove("hidden");
+    // Scroll to bottom when video section becomes visible
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     startBtn.textContent = "Stop Recording";
     nameInput.disabled = true;
     statusMsg.textContent = "";

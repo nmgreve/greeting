@@ -203,25 +203,33 @@ body {
     color: rgb(96, 133, 177); /* Darker color on hover */
 }
 
-.return-button {
-    position: fixed; /* Fix the button relative to the viewport */
-    bottom: 10px; /* px from the bottom of the viewable page */
-    right: 10px; /* Center the button horizontally */
-    padding: 7px 0px; /* Adjust padding for better alignment */
-    padding-bottom: 12px;
-    font-size: 14px;
-    width: 75px;
-    line-height: 1.3; /* Reduce line height for the button text */
-    color: rgb(41, 58, 79);
-    background-color: #f0f0f0;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    font-family: "Arya", sans-serif; /* Apply the new font to the button */
-    letter-spacing: 0.75px; /* Increase letter spacing for the button */
+.bottom-menu {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 9999;
 }
 
-.return-button:hover {
-    background-color: #c8c8c8; /* Darker blue on hover */
+.menu-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f0f0f0;
+  color: rgb(41, 58, 79);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 25px;
+  font-family: "Arya", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.75px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-button:hover {
+  background-color: #c8c8c8;
 }
