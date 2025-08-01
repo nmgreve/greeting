@@ -1,4 +1,4 @@
-import { ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+import { ref, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
 const startBtn = document.getElementById("startBtn");
 const nameInput = document.getElementById("nameInput");
@@ -39,7 +39,6 @@ startBtn.onclick = async () => {
     chunks = [];
     videoSection.classList.remove("hidden");
     // Scroll to bottom when video section becomes visible
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     startBtn.textContent = "Stop Recording";
     nameInput.disabled = true;
     statusMsg.textContent = "";
@@ -49,32 +48,50 @@ startBtn.onclick = async () => {
     mediaRecorder.ondataavailable = e => chunks.push(e.data);
 
     mediaRecorder.onstop = async () => {
-      // Hide and stop preview immediately
-      preview.pause();
-      preview.srcObject.getTracks().forEach(track => track.stop());
-      preview.srcObject = null;
-      preview.style.display = "none";
+  preview.pause();
+  preview.srcObject.getTracks().forEach(track => track.stop());
+  preview.srcObject = null;
+  preview.style.display = "none";
 
-      // Show uploading message
-      statusMsg.textContent = "Please wait, the video is uploading...";
-      statusMsg.style.display = "block";
+  statusMsg.textContent = "Uploading...";
+  const progressBar = document.getElementById("uploadProgress");
+  const progressText = document.getElementById("progressPercent");
 
-      const blob = new Blob(chunks, { type: "video/webm" });
-      const fileName = `${name.replace(/\s+/g, "_")}_${Date.now()}.webm`;
+  progressBar.classList.remove("hidden");
+  progressText.classList.remove("hidden");
 
-      try {
-        const fileRef = ref(window.firebaseStorage, "wedding-videos/" + fileName);
-        console.log("Firebase Storage Reference:", fileRef);
-        console.log("Firebase Storage Object:", window.firebaseStorage);
-        await uploadBytes(fileRef, blob);
+  const blob = new Blob(chunks, { type: "video/webm" });
+  const fileName = `${name.replace(/\s+/g, "_")}_${Date.now()}.webm`;
+
+  try {
+    const fileRef = ref(window.firebaseStorage, "wedding-videos/" + fileName);
+    const uploadTask = uploadBytesResumable(fileRef, blob);
+
+    uploadTask.on("state_changed", 
+      (snapshot) => {
+        const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        progressBar.value = percent;
+        progressText.textContent = percent + "%";
+      }, 
+      (error) => {
+        console.error("Upload failed:", error);
+        statusMsg.textContent = `❌ Upload failed: ${error.message || "Unknown error"}`;
+        progressBar.classList.add("hidden");
+        progressText.classList.add("hidden");
+      }, 
+      () => {
         statusMsg.textContent = "✅ Video uploaded! Thank you!";
-      } catch (err) {
-        console.error("Upload failed:", err);
-        statusMsg.textContent = `❌ Upload failed: ${err.message || "Unknown error"}. Please check the console for more details.`;
+        progressBar.classList.add("hidden");
+        progressText.classList.add("hidden");
       }
+    );
+  } catch (err) {
+    console.error("Upload error:", err);
+    statusMsg.textContent = `❌ Upload failed: ${err.message || "Unknown error"}`;
+  }
 
-      reset();
-    };
+  reset();
+};
 
     mediaRecorder.start();
     startCountdown(60);

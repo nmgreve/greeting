@@ -17,7 +17,7 @@
     </div>
     <div class="content-container">
       <h1>SIGN OUR GUESTBOOK</h1>
-      <h2>Record a Message for the Couple</h2>
+      <h2>Record a Message for Corinne & Nathaniel</h2>
       <div class="input-container">
         <input id="nameInput" type="text" placeholder="Enter Your Name(s)" required>
         <button id="clearButton" class="clear-button" type="button">X</button>
@@ -33,7 +33,21 @@
         <video id="preview" autoplay muted playsinline></video>
       </div>
 
+      <progress id="uploadProgress" value="0" max="100" class="hidden"></progress>
+      <p id="progressPercent" class="hidden">0%</p>
+
       <p id="statusMsg"></p>
+
+      <p id="instructions"><br>
+        1️⃣ Get your group together 👨‍👩‍👧‍👦<br>
+        2️⃣ Type your names ✍️<br>
+        3️⃣ Hit “Start Recording” 🎬<br>
+        4️⃣ Allow mic & camera 🎤📷 <br>
+        5️⃣ Record your message (60 sec max) 💌 <br>
+        6️⃣ Hit “Stop Recording” 🛑 <br>
+        7️⃣ Wait for it to upload ⏳✅<br>
+        ⚠️ Don't refresh or close the page until it says “Uploaded!”<br>
+      </p>
 
       <div class="bottom-menu">
         <a href="https://theknot.com/ncgreve" class="menu-button">
