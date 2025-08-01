@@ -158,6 +158,7 @@ function reset() {
   countdownEl.classList.remove("green");
   nameInput.disabled = false;
   clearBtn.classList.toggle("visible", nameInput.value.trim() !== "");
+  countdownEl.textContent = 60;
 
   hideProgressElements();
   updateVisibility();

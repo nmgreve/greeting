@@ -144,11 +144,11 @@ body {
   
   #countdown {
     font-size: 2em;
-    color: red;
+    color: rgb(44, 151, 44);
   }
   
   #countdown.green {
-    color: green;
+    color: rgb(192, 68, 68);
   }
   
   #warning {
