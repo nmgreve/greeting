@@ -58,7 +58,9 @@ startBtn.onclick = async () => {
   const progressText = document.getElementById("progressPercent");
 
   progressBar.classList.remove("hidden");
+  progressBar.style.display = "block"; // force visible in iOS
   progressText.classList.remove("hidden");
+  progressText.style.display = "block";
 
   const blob = new Blob(chunks, { type: "video/webm" });
   const fileName = `${name.replace(/\s+/g, "_")}_${Date.now()}.webm`;
@@ -72,19 +74,19 @@ startBtn.onclick = async () => {
         const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         progressBar.value = percent;
         progressText.textContent = percent + "%";
-      }, 
+      },
       (error) => {
-        console.error("Upload failed:", error);
-        statusMsg.textContent = `❌ Upload failed: ${error.message || "Unknown error"}`;
+        statusMsg.textContent = "❌ Upload failed";
         progressBar.classList.add("hidden");
         progressText.classList.add("hidden");
-      }, 
+      },
       () => {
         statusMsg.textContent = "✅ Video uploaded! Thank you!";
         progressBar.classList.add("hidden");
         progressText.classList.add("hidden");
       }
     );
+
   } catch (err) {
     console.error("Upload error:", err);
     statusMsg.textContent = `❌ Upload failed: ${err.message || "Unknown error"}`;
@@ -134,8 +136,15 @@ function reset() {
   nameInput.disabled = false;
   clearBtn.classList.toggle("visible", nameInput.value.trim() !== "");
 
-  // Show the preview element again for next recording
-  preview.style.display = "block";
+  // Hide progress elements (in case of second recording)
+  const progressBar = document.getElementById("uploadProgress");
+  const progressText = document.getElementById("progressPercent");
+  progressBar.classList.add("hidden");
+  progressText.classList.add("hidden");
+  progressBar.value = 0;
+  progressText.textContent = "0%";
 
+  preview.style.display = "block";
   preview.srcObject = null;
 }
+
