@@ -282,3 +282,7 @@ progress[value]::-webkit-progress-value {
   background-color: #b3a369;
   border-radius: 8px;
 }
+
+.hidden {
+  display: none !important;
+}

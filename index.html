@@ -16,8 +16,8 @@
       <img src="sparkle.png" alt="Header Image" class="header-img">
     </div>
     <div class="content-container">
-      <h1>SIGN OUR GUESTBOOK</h1>
-      <h2>Record a Message for Corinne & Nathaniel</h2>
+      <h1 id="guestbookTitle">SIGN OUR GUESTBOOK</h1>
+      <h2 id="guestbookSubtitle">Record a Message for Corinne & Nathaniel</h2>
       <div class="input-container">
         <input id="nameInput" type="text" placeholder="Enter Your Name(s)" required>
         <button id="clearButton" class="clear-button" type="button">X</button>
@@ -33,8 +33,9 @@
         <video id="preview" autoplay muted playsinline></video>
       </div>
 
-      <progress id="uploadProgress" value="0" max="100" class="hidden"></progress>
-      <p id="progressPercent" class="hidden">0%</p>
+      <progress id="uploadProgress" value="0" max="100" class="hidden" style="display: none;"></progress>
+      <span id="progressPercent" class="hidden" style="display: none;">0%</span>
+
 
       <p id="statusMsg"></p>
 
@@ -59,7 +60,7 @@
           </svg>
           Website
         </a>
-        <a href="https://yourdomain.com/program" class="menu-button">
+        <a href="https://www.canva.com/design/DAGuAlmjz7o/jypmrPoZa6Wm3tcy7ObuXQ/view?utm_content=DAGuAlmjz7o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf4fffa7d14" class="menu-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
