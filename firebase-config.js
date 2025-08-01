@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyB1foDDpomvV7S_8ZpRtiUgIhYOp9Oi6H8",
   authDomain: "ncgreeting.firebaseapp.com",
   projectId: "ncgreeting",
-  storageBucket: "ncgreeting.appspot.com",
+  storageBucket: "ncgreeting.firebasestorage.app",
   messagingSenderId: "947337187260",
   appId: "1:947337187260:web:1d512cc2415f68928565b9",
   measurementId: "G-HN5KMXN3RX"
