@@ -13,6 +13,10 @@ const progressText = document.getElementById("progressPercent");
 const guestbookTitle = document.getElementById("guestbookTitle");
 const guestbookSubtitle = document.getElementById("guestbookSubtitle");
 const inputContainer = document.querySelector(".input-container");
+const recordingIndicator = document.getElementById("recordingIndicator");
+const mediaPicker = document.getElementById("mediaPicker");
+const mediaUploadBtn = document.getElementById("mediaUploadBtn");
+
 
 let mediaRecorder;
 let chunks = [];
@@ -60,6 +64,7 @@ startBtn.onclick = async () => {
       preview.srcObject.getTracks().forEach(track => track.stop());
       preview.srcObject = null;
       preview.style.display = "none";
+      hideRecordingIndicator();
 
       statusMsg.textContent = "Uploading...";
       videoSection.classList.add("hidden");
@@ -90,7 +95,7 @@ startBtn.onclick = async () => {
           },
           () => {
             console.log("✅ Upload complete");
-            statusMsg.textContent = "✅ Video uploaded! Thank you!";
+            statusMsg.textContent = "✅ Video uploaded! Click 'Start Recording' to send another message";
             setTimeout(() => {
               hideProgressElements();
               reset();  // Reset on success after a short delay
@@ -107,7 +112,8 @@ startBtn.onclick = async () => {
     };
 
     mediaRecorder.start();
-    startCountdown(60);
+    startCountdown(45);
+    showRecordingIndicator();
   } else {
     clearInterval(timer);
     mediaRecorder.stop();
@@ -123,7 +129,7 @@ function startCountdown(seconds) {
     countdownEl.textContent = time;
 
     if (time <= 10) warningEl.classList.remove("hidden");
-    if (time <= 30) countdownEl.classList.add("green");
+    if (time <= 20) countdownEl.classList.add("green");
 
     if (time <= 0) {
       clearInterval(timer);
@@ -139,7 +145,6 @@ function showProgressElements() {
   progressBar.classList.remove("hidden");
   progressText.classList.remove("hidden");
 }
-
 
 function hideProgressElements() {
   progressBar.style.display = "none";
@@ -158,7 +163,7 @@ function reset() {
   countdownEl.classList.remove("green");
   nameInput.disabled = false;
   clearBtn.classList.toggle("visible", nameInput.value.trim() !== "");
-  countdownEl.textContent = 60;
+  countdownEl.textContent = 45;
 
   hideProgressElements();
   updateVisibility();
@@ -181,17 +186,77 @@ progressText.addEventListener("click", () => {
 
 function updateVisibility() {
   const videoVisible = !videoSection.classList.contains("hidden");
-  // Remove checking progress bar visibility from here to avoid conflicts
 
   if (videoVisible) {
     guestbookTitle.classList.add("hidden");
     guestbookSubtitle.classList.add("hidden");
     inputContainer.classList.add("hidden");
   } else {
-    // Show everything else when video not visible
     guestbookTitle.classList.remove("hidden");
     guestbookSubtitle.classList.remove("hidden");
     inputContainer.classList.remove("hidden");
   }
 }
+
+function showRecordingIndicator() {
+  recordingIndicator.style.display = "block";
+}
+
+function hideRecordingIndicator() {
+  recordingIndicator.style.display = "none";
+}
+
+//Handles Click of Media Upload Button
+mediaUploadBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  if (!name) return alert("Please enter your name."); // forces use of name
+  mediaPicker.click();
+});
+
+mediaPicker.addEventListener("change", async (event) => {
+  const files = Array.from(event.target.files);
+  const timeNow = Date.now();
+  const safeName = nameInput.value.trim().replace(/\s+/g, "_");
+  let fileList = ""; // Shared across all files
+  const uploadPromises = [];
+
+  showProgressElements();
+
+  for (const file of files) {
+    const newFileName = `${safeName}_${timeNow}_${file.name}`;
+    const storageRef = ref(window.firebaseStorage, `library-uploads/${newFileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    const uploadPromise = new Promise((resolve) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          progressBar.value = percent;
+          progressText.textContent = percent + "%";
+        },
+        (error) => {
+          console.error(`Error uploading ${file.name}:`, error);
+          fileList += `${file.name} - ❌ Error, Try this File Again\n`;
+          statusMsg.textContent = fileList;
+          resolve(); // Resolve to continue to next file
+        },
+        () => {
+          fileList += `${file.name} - ✅ Complete\n`;
+          statusMsg.textContent = fileList;
+          console.log(`${file.name} Complete`);
+          resolve(); // Resolve when upload is complete
+        }
+      );
+    });
+
+    uploadPromises.push(uploadPromise);
+  }
+
+  await Promise.all(uploadPromises);
+  setTimeout(() => {
+    hideProgressElements();
+    reset();
+  }, 1000);
+});
 

@@ -3,7 +3,7 @@ body {
     line-height: 1.2; /* Adjust line height to reduce vertical spacing */
     padding: 0;
     margin: 0; /* Remove default margin */
-    background: rgb(41, 58, 79);
+    background: #293a4f;
     color: #f0f0f0;
     text-align: center;
     letter-spacing: .5px; /* Slightly increase letter spacing for all text */
@@ -142,6 +142,35 @@ body {
     justify-content: center; 
   }
   
+  .recording-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0.7);
+    animation: pulse 1.5s infinite;
+    z-index: 10;
+    display: none; /* Hidden by default */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+    70% {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 8px rgba(255, 0, 0, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+  }
+
   #countdown {
     font-size: 2em;
     color: rgb(44, 151, 44);
